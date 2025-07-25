@@ -9,7 +9,7 @@
     const std::string OS =  "-f win64 ";
 #endif
 
-// asm will be tool
+
 std::string removextension(const std::string &filename) {
     size_t lastDot = filename.find_last_of('.');
     if (lastDot != std::string::npos) {
