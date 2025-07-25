@@ -1,4 +1,6 @@
 ; this example file for amd64 devices
+bits 64
+
 section .data
 	hello:     db 'Hello world!', 10
 	helloLen:  equ $-hello
