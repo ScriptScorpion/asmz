@@ -1,7 +1,7 @@
 ***SimpleASM - utility for simpler assembler code compiltion***
 
 # Disclaimer
-* for tool to work you need: nasm(but you change to what you want), ld.
+* for tool to work you need: nasm, ld.
 
   This tool right now only for Linux and BSD systems.
 
