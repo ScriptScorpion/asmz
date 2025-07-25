@@ -1,7 +1,9 @@
 # this example file for amd64 devices
+.code64
+
 .section .data
-	hello:     .ascii "Hello world!\n"  
-	helloLen = . - hello            
+	hello: .ascii "Hello world!\n"  
+	helloLen = .-hello            
 
 .section .text
 	.global _start
