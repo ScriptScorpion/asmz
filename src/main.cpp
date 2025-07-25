@@ -5,6 +5,8 @@
 
 #if __unix__
     const std::string OS =  "-f elf64 ";
+#else 
+    std::exit(1);
 #endif
 
 
