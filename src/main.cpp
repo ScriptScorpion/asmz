@@ -46,14 +46,13 @@ std::string Find(const std::string input) {
 int main(int argc, char *argv[]) {
 
     std::string arguments = "nasm " + OS;
-    std::string linker= "ld ";
+    std::string linker= "ld "; 
+    std::string exestr = "./";
 
-     
     for (int i = 1; i < argc; ++i) {
         arguments += argv[i];
         arguments += " ";
     }
-    std::cout << arguments << std::endl;
     std::string extrac = Find(arguments); // gets file that specified by -o
     if (extrac.empty()) {
         if (argc > 2) {
@@ -64,9 +63,10 @@ int main(int argc, char *argv[]) {
             extrac = argv[1];
         }
     }
+
     int ASMoutcome = system(arguments.c_str());
     if (ASMoutcome != 0) {
-        std::cout << "Error \n";
+        std::cout << "Compiling error \n";
         std::exit(1);
     }
 
@@ -79,9 +79,15 @@ int main(int argc, char *argv[]) {
 
     int Oresult = system(linker.c_str());
     if (Oresult != 0) {
-        std::cout << "Error \n";
+        std::cout << "Linking Error \n";
         std::exit(1);
     }
 
+    exestr += extrac;
+    int exeresult = system(exestr.c_str());
+    if (exeresult != 0) {
+        std::cout << "Execution error \n";
+        std::exit(1);
+    }
     return 0;
 }
