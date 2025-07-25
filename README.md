@@ -9,7 +9,7 @@
 # How Compile
 1. if you putted tool into `/usr/bin` or `/usr/local/bin`, type: `asm "assembler file"`, or if you want you can specify name of output file by including `-o` flag.
 
-This tool right now only for Linux and BSD because i don't work on Windows
+This tool right now only for Linux and BSD.
 
 # Issues 
 * if you want to get different output name specify name with flag -o, example: `asm example.asm -o exe.o`. `.o` is needed, else you get error.
