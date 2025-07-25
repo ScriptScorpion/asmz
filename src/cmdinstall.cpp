@@ -1,21 +1,48 @@
 #include <iostream>
 #include <filesystem>
-#include <cstdlib> 
-// this installation file not fully done yet
-int main() {
-    std::string home = std::getenv("HOME");
-    std::filesystem::path source = home + "/Downloads/SimpleASM/command/asm";
-    std::filesystem::path destination = "/usr/local/bin/asm";
-    try {
-        if (!std::filesystem::exists(source)) {
-            std::cout << "Error: File not found " + std::string(source) << std::endl;
-            return 1;
+#include <unistd.h>
+#include <pwd.h>
+#include <cstdlib>
+
+std::string gethome() {
+    if (const char *sudo_user = std::getenv("SUDO_USER")) {
+        if (struct passwd* pwd = getpwnam(sudo_user)) {
+            return pwd->pw_dir;
         }
-        std::filesystem::copy(source, destination); 
-//        std::filesystem::remove(source);
-        std::cout << "Installation complete!";
-    } catch (const std::filesystem::filesystem_error& e) {
+    }
+    
+    if (const char *home = std::getenv("HOME")) {
+        return home;
+    }
+    
+    return "";
+}
+
+int main() {
+    std::string home_dir = gethome();
+    if (home_dir.empty()) {
+        std::cout << "Error: Failed to determine home directory\n";
+        return 1;
+    }
+
+    std::filesystem::path source = home_dir + "/Downloads/SimpleASM/command/asm";
+    std::filesystem::path destination = "/usr/local/bin/asm";
+
+    if (!std::filesystem::exists(source)) {
+        std::cout << "Error: Source file not found\n";
+        return 1;
+    }
+
+    try {
+        std::filesystem::copy(source, destination);
+        std::cout << "Installed successfully\n";
+    } 
+    catch (const std::filesystem::filesystem_error& e) {
         std::cout << "Error: " << e.what() << std::endl;
+        if (e.code() == std::errc::permission_denied) {
+            std::cerr << "Try running with sudo\n";
+        }
+        return 1;
     }
 
     return 0;

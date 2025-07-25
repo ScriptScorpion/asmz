@@ -1,3 +1,4 @@
+; this example file for amd64 devices
 section .data
 	hello:     db 'Hello world!', 10
 	helloLen:  equ $-hello
