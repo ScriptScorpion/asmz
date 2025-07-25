@@ -6,7 +6,7 @@
 #if __unix__
     const std::string OS =  "-f elf64 ";
 #else 
-    std::exit(1);
+    throw std::runtime_error("Unsupported OS");
 #endif
 
 
