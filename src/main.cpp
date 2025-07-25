@@ -47,43 +47,43 @@ std::string Find(const std::string input) {
 
 int main(int argc, char *argv[]) {
 
-     std::string arguments = "nasm " + OS;
-     std::string linker= "ld ";
+    std::string arguments = "nasm " + OS;
+    std::string linker= "ld ";
 
      
-     for (int i = 1; i < argc; ++i) {
-          arguments += argv[i];
-          arguments += " ";
-     }
-     std::cout << arguments << std::endl;
-     std::string extrac = Find(arguments); // gets file that specified by -o
-     if (extrac.empty()) {
-         if (argc > 2) {
-             std::cout << "Specify assembler file \n";
-             std::exit(1);
-         }
-         else {
-             extrac = argv[1];
-         }
-     }
-     int ASMoutcome = system(arguments.c_str());
-     if (ASMoutcome != 0) {
-         std::cout << "Error \n";
-         std::exit(1);
-     }
+    for (int i = 1; i < argc; ++i) {
+        arguments += argv[i];
+        arguments += " ";
+    }
+    std::cout << arguments << std::endl;
+    std::string extrac = Find(arguments); // gets file that specified by -o
+    if (extrac.empty()) {
+        if (argc > 2) {
+            std::cout << "Specify assembler file \n";
+            std::exit(1);
+        }
+        else {
+            extrac = argv[1];
+        }
+    }
+    int ASMoutcome = system(arguments.c_str());
+    if (ASMoutcome != 0) {
+        std::cout << "Error \n";
+        std::exit(1);
+    }
 
-     extrac = removextension(extrac);
+    extrac = removextension(extrac);
 
-     linker += extrac;
-     linker += ".o ";
-     linker += "-o "; 
-     linker += extrac;
+    linker += extrac;
+    linker += ".o ";
+    linker += "-o "; 
+    linker += extrac;
 
-     int Oresult = system(linker.c_str());
-     if (Oresult != 0) {
-         std::cout << "Error \n";
-         std::exit(1);
-     }
+    int Oresult = system(linker.c_str());
+    if (Oresult != 0) {
+        std::cout << "Error \n";
+        std::exit(1);
+    }
 
-     return 0;
+    return 0;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <cstdlib> 
-
+// this installation file not fully done yet
 int main() {
     std::string home = std::getenv("HOME");
     std::filesystem::path source = home + "/Downloads/SimpleASM/command/asm";
