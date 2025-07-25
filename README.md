@@ -1,4 +1,4 @@
-***SimpleASM - utility for simpler assembler code compiltion***
+***SimpleASM - utility for simpler assembler code compiltion*** that helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
 
 # Disclaimer
 * for tool to work you need: nasm, ld.
