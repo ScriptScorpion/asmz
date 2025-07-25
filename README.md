@@ -7,7 +7,7 @@
 1. Put "asm" command into `/usr/bin/`. If you want to compile code yourself(needed gcc or clang): `cd SimpleASM && cd src && g++ main.cpp -o asm`
 
 # How Compile
-1. if you putted tool into `/usr/bin` or `/usr/local/bin`, type: `asm "assembler file"`.
+1. if you putted tool into `/usr/bin` or `/usr/local/bin`, type: `asm "assembler file"`, or if you want you can specify name of output file by including `-o` flag.
 
 This tool right now only for Linux and BSD because i don't work on Windows
 
