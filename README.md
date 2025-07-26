@@ -8,9 +8,9 @@
 # Installation
  **There are two ways to install: 1 - manual, 2 - automatic**
 
-1. Put "asm" command into `/usr/local/bin/`. If you want to compile code yourself(needed gcc or clang): `cd SimpleASM && cd src && g++ main.cpp -o basm`.
+1. Put "asm" command into `/usr/local/bin/`. If you want to compile code yourself(needed gcc or clang): `cd BASM && cd src && g++ main.cpp -o basm`.
 
-2. Run `chmod +x INSTALL` and `sudo ./INSTALL`, or you can build code yourself with gcc or clang: `cd SimpleASM && cd src && g++ cmdinstall.cpp -o INSTALL && sudo ./INSTALL`.
+2. Run `chmod +x INSTALL` and `sudo ./INSTALL`, or you can build code yourself with gcc or clang: `cd BASM && cd src && g++ cmdinstall.cpp -o INSTALL && sudo ./INSTALL`.
 
 # How Compile
 
