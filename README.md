@@ -1,4 +1,4 @@
-***BASM (Better ASM) - a utility for simpler assembler code compiltion*** that helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
+***BASM (Better ASM) - a utility for simpler and better Assembly code compiltion***. **BASM** helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
 
 # Disclaimer
 * for **BASM** to work you need: nasm, ld.
