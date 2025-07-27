@@ -18,4 +18,4 @@
 
 # Issues
 
-* no issues for now(if you found issue text me on discord).
+* no issues for now (if you found issue describe it in [Issues](https://github.com/ScriptScorpion/BASM/issues) page).
