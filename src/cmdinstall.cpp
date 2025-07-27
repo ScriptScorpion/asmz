@@ -25,8 +25,8 @@ int main() {
         return 1;
     }
 
-    std::filesystem::path source = home_dir + "/Downloads/BASM/command/basm";
-    std::filesystem::path destination = "/usr/local/bin/basm";
+    std::filesystem::path source = home_dir + "/Downloads/asmz/command/asmz";
+    std::filesystem::path destination = "/usr/local/bin/asmz";
 
     if (!std::filesystem::exists(source)) {
         std::cout << "Error: Source file not found\n";
