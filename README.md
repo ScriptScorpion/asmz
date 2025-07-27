@@ -8,14 +8,14 @@
 # Installation
  **There are two ways to install: 1 - manual, 2 - automatic**
 
-1. Put "asm" command into `/usr/local/bin/`. If you want to compile code yourself(needed gcc or clang): `cd BASM && cd src && g++ main.cpp -o basm`.
+1. Put "basm" command into `/usr/local/bin/`. If you want to compile code yourself(needed gcc or clang): `cd BASM && cd src && g++ main.cpp -o basm`.
 
 2. Run `chmod +x INSTALL` and `sudo ./INSTALL`, or you can build code yourself with gcc or clang: `cd BASM && cd src && g++ cmdinstall.cpp -o INSTALL && sudo ./INSTALL`.
 
-# How Compile
+# How Compile Assembly code
 
-1. if you putted **BASM** into `/usr/local/bin`, type: `basm "assembler file"` change "assembler file" to name of assembler file you want to compile, or if you want specify name of output, type `-o` flag and name of executable with `.o` extension.
+1. if you putted **BASM** into `/usr/local/bin`, type: `basm "assembler file"` change "assembler file" to name of assembler file you want to compile, or if you want specify name of output, type `-o` flag, and after flag type name of executable you want.
 
 # Issues
 
-* if you want to get different output name specify name with flag -o, example: `basm example.asm -o exe.o`. `.o` is needed, else you get error.
+* no issues for now(if you found issue text me on discord).
