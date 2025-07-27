@@ -1,4 +1,4 @@
-**ASMZ (Eazy ASM), a utility for simpler Assembly code compilation**
+ASMZ (Eazy ASM), a utility for simpler Assembly code compilation
 ===================================================================
 **ASMZ** helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
 
