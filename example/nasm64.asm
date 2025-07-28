@@ -1,4 +1,4 @@
-; this example file for amd64 devices
+; this example file for x86-64(amd64) devices
 bits 64
 
 section .data
