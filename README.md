@@ -3,7 +3,7 @@ ASMZ (Eazy ASM), a utility for simpler Assembly code compilation
 **ASMZ** helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
 
 # Disclaimer
-* for **ASMZ** to work you need: nasm, ld.
+* for **ASMZ** to work you need: any Assembly compiler(except fasm), ld.
 
   **ASMZ** right now only for Linux and BSD systems.
 
