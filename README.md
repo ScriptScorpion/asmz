@@ -16,7 +16,7 @@ ASMZ (Eazy ASM), a utility for simpler Assembly code compilation
 
 # How Compile Assembly code
 
-1. if you putted "asmz" into `/usr/local/bin`, type: `asmz "assembler file"` change "assembler file" to name of assembler file you want to compile, or if you want specify name of output, type `-o` flag, and after flag type name of executable you want.
+1. if you putted "asmz" into `/usr/local/bin`, type: `asmz {Assembly-language compiler} "assembler file"` change "assembler file" to name of assembler file you want to compile, change "Assembly-language compiler" to your assembler compiler. If you want specify name of output, type `-o` flag, and after flag type name of executable you want.
 
 # Issues
 
