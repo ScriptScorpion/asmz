@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
     if (argc == 1) {
-        std::cout << "Specify assembler file \n";
+        std::cerr << "Specify assembler file \n";
         std::exit(1);
     }
     for (int i = 1; i < argc; ++i) {   
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 
     int ASMoutcome = system(arguments.c_str());
     if (ASMoutcome != 0) {
-        std::cout << "Compiling error \n";
+        std::cerr << "Compiling error \n";
         std::exit(1);
     }
     if (Vec_extrac.empty()) {
@@ -81,14 +81,14 @@ int main(int argc, char *argv[]) {
     
     int Oresult = system(linker.c_str());
     if (Oresult != 0) {
-        std::cout << "Linking Error \n";
+        std::cerr << "Linking Error \n";
         std::exit(1);
     }
 
     exestr += Vec_extrac;
     int exeresult = system(exestr.c_str());
     if (exeresult != 0) {
-        std::cout << "Execution error \n";
+        std::cerr << "Execution error \n";
         std::exit(1);
     }
     return 0;
