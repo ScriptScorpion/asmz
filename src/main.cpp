@@ -5,8 +5,12 @@
 #include <cstring>
 #include <vector>
 
-#if __unix__
-    const std::string OS =  "-f elf64 ";
+#if defined(__unix__) || defined(unix)
+    #if defined(__i386__) || (UINTPTR_MAX == 0xFFFFFFFF)
+        const std::string OS =  "-f elf32 ";
+    #elif  defined(__x86_64__) || (UINTPTR_MAX == 0xFFFFFFFFFFFFFFFF)
+        const std::string OS = "-f elf64 ";
+    #endif
 #else 
     throw std::runtime_error("Unsupported OS");
 #endif
@@ -111,10 +115,6 @@ int main(int argc, char *argv[]) {
         if (safeargc[i] == "-o") {
             if (!(Vec_extrac.empty()) && argc == 5) {
                 safeargc[4] += ".o";
-            }
-            else if (!(Vec_extrac.empty()) && argc > 5) {  
-                std::cout << "Sorry, you cannot have more then 5 arguments(I will fix this in next updates)";
-                break;
             }
         }
         arguments += safeargc[i];
