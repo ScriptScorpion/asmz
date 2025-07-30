@@ -1,4 +1,4 @@
-; this example file for x86(i386) devices
+; this example file for x86(i386) devices and Netwide Assembler
 bits 32
 
 section .data

@@ -1,4 +1,4 @@
-# this example file for x86(i386) devices
+# this example file for x86(i386) devices and Gnu Assembler
 .code32
 
 .section .data

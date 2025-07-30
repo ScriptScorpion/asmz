@@ -8,8 +8,10 @@
 #if defined(__unix__) || defined(unix)
     #if defined(__i386__) || (UINTPTR_MAX == 0xFFFFFFFF)
         const std::string OS =  "-f elf32 ";
+        const std::string LD = "-m elf_i386 ";
     #elif  defined(__x86_64__) || (UINTPTR_MAX == 0xFFFFFFFFFFFFFFFF)
         const std::string OS = "-f elf64 ";
+        const std::string LD = "";
     #endif
 #else 
     throw std::runtime_error("Unsupported OS");
@@ -129,7 +131,7 @@ int main(int argc, char *argv[]) {
         Vec_extrac = argv[2];
     }
     Vec_extrac = removextension(Vec_extrac);
-
+    linker += LD;
     linker += Vec_extrac;
     linker += ".o ";
     linker += "-o "; 
