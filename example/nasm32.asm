@@ -2,8 +2,8 @@
 bits 32
 
 section .data
-	hello:     db 'Hello world!', 10
-	helloLen:  equ $-hello
+	hello:     db "Hello world!", 10, 0 ; string and newline character in ASCII, "\n" in C/C++ and Null terminator to know programm where line ends
+	helloLen:  equ $-hello-1 	; length of string -1 because of Null terminator 
 
 section .text
 	global _start 
@@ -11,8 +11,8 @@ section .text
 _start:
 	mov eax, 4            ; 'write' system call = 4 in 32bit, in 64 bit Arch call=1
 	mov ebx, 1            ; file descriptor 1 = STDOUT
-	mov ecx,hello        ; string to write
-	mov edx,helloLen     ; length of string to write
+	lea ecx, [rel hello]  ; string to write
+	mov edx, helloLen     ; length of string to write
 	int 0x80              ; call the kernel
 
 	mov eax, 1            ; 'exit' system call
