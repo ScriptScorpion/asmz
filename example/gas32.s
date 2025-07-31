@@ -9,12 +9,12 @@
 	.global _start
 
 _start:
-	mov $4, %eax          # 'write' system call = 4 in 32bit, in 64 bit Arch call=1
-	mov $1, %ebx          # file descriptor 1 = STDOUT
-	mov $hello, %ecx      # string to write
-	mov $helloLen, %edx   # length of string to write
+	movl $4, %eax          # 'write' system call = 4 in 32bit, in 64 bit Arch call=1
+	movl $1, %ebx          # file descriptor 1 = STDOUT
+	movl $hello, %ecx      # string to write
+	movl $helloLen, %edx   # length of string to write
 	int $0x80               # call the kernel
 
-	mov $1, %eax         # 'exit' system call
-	mov $0, %ebx        # exit with error code 0
+	movl $1, %eax         # 'exit' system call
+	movl $0, %ebx        # exit with error code 0
 	int $0x80               # call the kernel

@@ -9,14 +9,14 @@
     .global _start
 
 _start:
-    mov $1, %rax          # sys_write
-    mov $1, %rdi          # stdout
-    mov $num, %rsi        # adress of line
-    mov $length,%rdx     # length of output
+    movq $1, %rax          # sys_write
+    movq $1, %rdi          # stdout
+    movq $num, %rsi        # adress of line
+    movq $length,%rdx     # length of output
     syscall 
 
     # exiting
-    mov $60, %rax         # sys_exit
-    xor %rdi, %rdi        # return 0
+    movq $60, %rax         # sys_exit
+    xorq %rdi, %rdi        # return 0
     syscall
 
