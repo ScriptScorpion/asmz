@@ -63,7 +63,6 @@ int main(int argc, char *argv[]) {
     std::string linker= "ld "; 
     std::string exestr = "./";
     std::ifstream CodeArch;
-    std::string Arch = "";
     std::string line;
     std::string extraLd = "";
     std::string FileOpen = argv[2];
