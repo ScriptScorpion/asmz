@@ -1,4 +1,5 @@
 # this example file for x86-64(amd64) devices and Gnu Assembler
+# Disclaimer: you can write in GAS without b,w,l,q, after operation, but this in some cases can give error if you don't specify this.
 .code64
 
 .section .data
