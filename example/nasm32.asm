@@ -16,5 +16,5 @@ _start:
 	int 0x80              ; call the kernel
 
 	mov eax, 1            ; 'exit' system call
-	mov ebx, 0            ; exit with error code 0
+	xor ebx, ebx            ; exit with error code 0
 	int 0x80              ; call the kernel
