@@ -1,5 +1,5 @@
 # this example file for x86-64(amd64) devices and Gnu Assembler
-
+# This example was made with help of AI, if you found any bugs, please describe issue on Github Issues page
 .section .data
     prompt:         .asciz "Guess a number (1-100): "  # Prompt message
     too_low:        .asciz "Too low!\n"                # "Too low" message 

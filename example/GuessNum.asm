@@ -1,5 +1,5 @@
 ; This example file for x86-64(amd64) devices and Netwide Assembler
-
+; This example was made with help of AI, if you found any bugs, please describe issue on Github Issues page
 section .data
     prompt      db  "Guess a number (1-100): ", 0     ; Prompt message
     prompt_len  equ $ - prompt                       ; Length of prompt
