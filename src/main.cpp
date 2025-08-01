@@ -45,7 +45,8 @@ std::string CheckCompilers() {
     const std::vector<std::pair<std::string, std::string>> compilers = {
         {"   GAS", "as --version > /dev/null 2>&1"},
         {"   NASM", "nasm --version > /dev/null 2>&1"},
-        {"   YASM", "yasm --version > /dev/null 2>&1"}
+        {"   YASM", "yasm --version > /dev/null 2>&1"},
+        {"   FASM (Not supported)", "fasm --version > /dev/null 2>&1"}
     };
 
     for (const auto& [name, cmd] : compilers) {
@@ -65,10 +66,10 @@ int main(int argc, char *argv[]) {
     std::ifstream CodeArch;
     std::string line;
     std::string extraLd = "";
-    std::string FileOpen = argv[2];
+    std::string FileOpen;
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
-
+    const std::string availableCompilers = CheckCompilers();
     if (argc == 1) {
         std::cerr << "Specify Assembly compiler you are want to use (nasm, as, yasm). type 'asmz -h' for more help \n";
         std::exit(1);
@@ -78,7 +79,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     for (int j = 1; j < argc; j++) {
-        if (strcmp(argv[j], "-h") == 0 && !(CheckCompilers().empty())) { 
+        if (strcmp(argv[j], "-h") == 0 && !(availableCompilers.empty())) { 
+            
             std::cout << "ASMZ 1.2 \n"
             "Usage: asmz (ASM-Compiler) {EXAMPLE.asm} \n"
             "(ASM-Compiler) - is Assembly compiler you want to use, see below all avaible compilers \n"
@@ -86,14 +88,15 @@ int main(int argc, char *argv[]) {
             "\n"
             "Flags: \n"
             "   -o: Will make executable name to what you typed after this flag \n"
-            "Avaible Assembly compilers: \n" << CheckCompilers();
+            "Avaible Assembly compilers: \n" << availableCompilers;
             return 0;
         }
-        else if (CheckCompilers().empty()) {
+        else if (availableCompilers.empty()) {
             std::cerr << "Install Assembly language compiler first, like: nasm, as, yasm. \n";
             return 1;
         }
     }
+    FileOpen = argv[2];
     CodeArch.open(FileOpen);
     for (auto x : Compilers) {
         if (argv[1] == Compilers[0]) {
