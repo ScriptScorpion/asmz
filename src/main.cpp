@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     for (int j = 1; j < argc; j++) {
         if (strcmp(argv[j], "-h") == 0 && !(availableCompilers.empty())) { 
             
-            std::cout << "ASMZ 1.2 \n"
+            std::cout << " ASMZ 1.3 \n"
             "Usage: asmz (ASM-Compiler) {EXAMPLE.asm} \n"
             "(ASM-Compiler) - is Assembly compiler you want to use, see below all avaible compilers \n"
             "{EXAMPLE.asm} - is code written in Assembly language that you want to compile \n"
