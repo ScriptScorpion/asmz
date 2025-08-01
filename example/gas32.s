@@ -16,5 +16,5 @@ _start:
 	int $0x80               # call the kernel
 
 	movl $1, %eax         # 'exit' system call
-	movl $0, %ebx        # exit with error code 0
+	xorl %ebx, %ebx        # exit with error code 0
 	int $0x80               # call the kernel
