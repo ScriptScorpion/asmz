@@ -2,7 +2,7 @@
 .code64
 
 .section .data
-	hello: .ascii "GAS IS BEST! \n"   # string and newline character "\n" in C/C++ and Null terminator to know program where line ends  
+	hello: .asciz "GAS IS BEST! \n"   # string and newline character "\n" in C/C++, asciz instead of ascii to add Null terminator  
 	helloLen = .-hello         # length of string          
 
 .section .text
@@ -11,7 +11,7 @@
 _start:
 	movq $1, %rax          # 'write' system call = 4 in 32bit, in 64 bit Arch call=1
 	movq $1, %rdi          # file descriptor 1 = STDOUT
-	movq $hello, %rsi      # string to write
+	leaq hello(%rip), %rsi  # string to write
 	movq $helloLen, %rdx   # length of string to write
 	syscall               # call the kernel
 

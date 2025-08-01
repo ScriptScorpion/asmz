@@ -2,7 +2,7 @@
 .code32
 
 .section .data
-	hello: .ascii "GAS IS BEST! \n" # string and newline character "\n" in C/C++ and Null terminator to know program where line ends  
+	hello: .asciz "GAS IS BEST! \n" # string and newline character "\n" in C/C++, asciz instead of ascii to add Null terminator 
 	helloLen = .-hello          # length of string
 
 .section .text
