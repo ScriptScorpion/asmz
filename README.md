@@ -5,7 +5,7 @@ ASMZ (Eazy ASM), a utility for simpler Assembly code compilation
 # Disclaimer
 * for **ASMZ** to work you need: **any Assembly compiler** (checkout Wiki for more info about supported compilers: [Compilers](https://github.com/ScriptScorpion/asmz/wiki/Assembly-Compilers) ), **ld** (checkout Wiki for more info: [Linkers](https://github.com/ScriptScorpion/asmz/wiki/Assembly-Language-Linkers) ).
 
-  **ASMZ** right now only for Linux and BSD systems.
+  **ASMZ** right now only for Linux and BSD systems. But you there are ways to get it for Windows, here is possible ways: [Click here](https://github.com/ScriptScorpion/asmz/wiki/ASMZ-for-Windows)
 
 # Installation
  **There are two ways to install: 1 - manual, 2 - automatic**
