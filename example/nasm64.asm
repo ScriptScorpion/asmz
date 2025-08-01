@@ -2,7 +2,7 @@
 bits 64
 
 section .data
-	hello:     db "Hello world!", 10, 0 ; string and newline character in ASCII, "\n" in C/C++ and Null terminator to know programm where line ends
+	hello:     db "NASM IS BEST!", 10, 0 ; string and newline character in ASCII, "\n" in C/C++ and Null terminator to know program where line ends
 	helloLen:  equ $-hello-1 ; length of string -1 because of Null terminator
 
 section .text
