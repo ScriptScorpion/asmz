@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
             arguments = compiler;
             while (std::getline(CodeArch, line))
             {
-                if (line.find("bits 32")) {
+                if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
                     extraLd = "-m elf_i386 ";
                     break;
@@ -123,7 +123,7 @@ int main(int argc, char *argv[]) {
             arguments = compiler;
             while (std::getline(CodeArch, line))
             {
-                if (line.find("bits 32")) {
+                if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
                     extraLd = "-m elf_i386 ";
                     break;
