@@ -7,9 +7,9 @@
 	helloLen = .-hello         # length of string          
 
 .section .text
-	.global _start
+	.global start
 
-_start:
+start:
 	movq $1, %rax          # 'write' system call = 4 in 32bit, in 64 bit Arch call=1
 	movq $1, %rdi          # file descriptor 1 = STDOUT
 	leaq hello(%rip), %rsi  # string to write
