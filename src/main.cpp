@@ -63,6 +63,7 @@ int main(int argc, char *argv[]) {
     std::string arguments = "";
     std::string linker= "ld "; 
     std::string exestr = "./";
+    std::string remover = "rm ";
     std::ifstream CodeArch;
     std::string line;
     std::string extraLd = "";
@@ -168,7 +169,8 @@ int main(int argc, char *argv[]) {
         std::cerr << "Linking Error \n";
         std::exit(1);
     }
-
+    remover += Vec_extrac + ".o";
+    system(remover.c_str());
     exestr += Vec_extrac;
     int exeresult = system(exestr.c_str());
     if (exeresult != 0) {
