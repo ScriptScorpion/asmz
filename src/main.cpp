@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
     const std::string availableCompilers = CheckCompilers();
-    if (argc == 1) {
+    if (argc <= 2) {
         std::cerr << "Specify Assembly compiler you are want to use (nasm, as, yasm). type 'asmz -h' for more help \n";
         std::exit(1);
     }
