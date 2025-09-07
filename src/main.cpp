@@ -71,17 +71,22 @@ int main(int argc, char *argv[]) {
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
     const std::string availableCompilers = CheckCompilers();
-    if (argc <= 2) {
+    if (argc < 2) {
         std::cerr << "Specify Assembly compiler you are want to use (nasm, as, yasm). type 'asmz -h' for more help \n";
         std::exit(1);
+        return 1;
+    }
+    else if (argc == 2 && std::string(argv[1]) != "-h") {
+        std::cerr << "Specify Assembly file to compile.\n";
+        std::exit(1);
+        return 1;
     }
     if (Vec_extrac.find_first_of(";&|<>!*%^()$`/{}") != std::string::npos) {
         std::cerr << "Error: invalid symbols.\n";
         return 1;
     }
     for (int j = 1; j < argc; j++) {
-        if (strcmp(argv[j], "-h") == 0 && !(availableCompilers.empty())) { 
-            
+        if (std::string(argv[j]) == "-h") { 
             std::cout << " ASMZ 1.3 \n"
             "Usage: asmz (ASM-Compiler) {EXAMPLE.asm} \n"
             "(ASM-Compiler) - is Assembly compiler you want to use, see below all avaible compilers \n"
@@ -117,7 +122,7 @@ int main(int argc, char *argv[]) {
             }
             break;
         }
-        else if (argv[1] == Compilers[1]) {
+        else if (argv[1] == Compilers[1] || std::string(argv[1]) == "gas") {
             compiler = "as ";
             arguments = compiler;
             break;
