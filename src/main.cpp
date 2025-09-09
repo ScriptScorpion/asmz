@@ -31,7 +31,7 @@ std::string Findvector(const std::vector<std::string>& vec) {
             if (i + 1 < vec.size()) {  
                 return vec[i + 1];     
             } else {
-                return "";  
+                return "";
             }
         }
     }
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]) {
     std::string FileOpen;
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
+    bool is_gas = false;
     const std::string availableCompilers = CheckCompilers();
     if (argc < 2) {
         std::cerr << "Specify Assembly compiler you are want to use (nasm, as, yasm). type 'asmz -h' for more help \n";
@@ -124,6 +125,7 @@ int main(int argc, char *argv[]) {
         }
         else if (argv[1] == Compilers[1] || std::string(argv[1]) == "gas") {
             compiler = "as ";
+            is_gas = true;
             arguments = compiler;
             break;
         }
@@ -146,7 +148,11 @@ int main(int argc, char *argv[]) {
         }
     }
     CodeArch.close();
-    for (int i = 2; i < argc; ++i) {
+    if (is_gas && !(Vec_extrac.empty())) {
+        safeargc.insert(safeargc.begin() + 3, "-o");
+        safeargc.insert(safeargc.begin() + 4, (removextension(std::string(argv[2]))) + ".o");
+    }
+    for (int i = 2; i < safeargc.size(); ++i) {
         if (safeargc[i] == "-o") {
             if (!(Vec_extrac.empty()) && argc == 5) {
                 safeargc[4] += ".o";
