@@ -59,7 +59,6 @@ std::string CheckCompilers() {
 
 int main(int argc, char *argv[]) {
     std::vector <std::string> Compilers = {"nasm", "as", "yasm"};
-    std::string compiler = "";
     std::string arguments = "";
     std::string linker= "ld "; 
     std::string exestr = "./";
@@ -107,8 +106,7 @@ int main(int argc, char *argv[]) {
     CodeArch.open(FileOpen);
     for (auto x : Compilers) {
         if (argv[1] == Compilers[0]) {
-            compiler = "nasm ";
-            arguments = compiler;
+            arguments = "nasm ";
             while (std::getline(CodeArch, line))
             {
                 if ((line.find("bits 32")) != std::string::npos) {
@@ -124,14 +122,12 @@ int main(int argc, char *argv[]) {
             break;
         }
         else if (argv[1] == Compilers[1] || std::string(argv[1]) == "gas") {
-            compiler = "as ";
             is_gas = true;
-            arguments = compiler;
+            arguments = "as ";
             break;
         }
         else if (argv[1] == Compilers[2]) {
-            compiler = "yasm ";
-            arguments = compiler;
+            arguments = "yasm ";
             while (std::getline(CodeArch, line))
             {
                 if ((line.find("bits 32")) != std::string::npos) {
