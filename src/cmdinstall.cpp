@@ -6,7 +6,6 @@ This file helps install "asmz" command to /usr/local/bin/ you can do that yourse
 #include <iostream>
 #include <filesystem>
 #include <pwd.h>
-#include <cstdlib>
 #include <unistd.h>
 #include <limits.h>
 #include <string>
