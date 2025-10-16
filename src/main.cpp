@@ -63,10 +63,9 @@ int main(int argc, char *argv[]) {
     std::string linker= "ld "; 
     std::string exestr = "./";
     std::string remover = "rm ";
-    std::ifstream CodeArch;
+    std::ifstream Code;
     std::string line;
     std::string extraLd = "";
-    std::string FileOpen;
     std::vector <std::string> safeargc(argv, argv + argc);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
     bool is_gas = false;
@@ -102,12 +101,11 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     }
-    FileOpen = argv[2];
-    CodeArch.open(FileOpen);
+    Code.open(argv[2]);
     for (auto x : Compilers) {
         if (argv[1] == Compilers[0]) {
             arguments = "nasm ";
-            while (std::getline(CodeArch, line))
+            while (std::getline(Code, line))
             {
                 if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
@@ -128,7 +126,7 @@ int main(int argc, char *argv[]) {
         }
         else if (argv[1] == Compilers[2]) {
             arguments = "yasm ";
-            while (std::getline(CodeArch, line))
+            while (std::getline(Code, line))
             {
                 if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
@@ -143,7 +141,7 @@ int main(int argc, char *argv[]) {
             break;
         }
     }
-    CodeArch.close();
+    Code.close();
     if (is_gas && !(Vec_extrac.empty())) {
         safeargc.insert(safeargc.begin() + 3, "-o");
         safeargc.insert(safeargc.begin() + 4, (removextension(std::string(argv[2]))) + ".o");
