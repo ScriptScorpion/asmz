@@ -1,10 +1,9 @@
 #include <filesystem>
 #include <iostream>
-#include <cstdlib>
-#include <string>
 #include <cstring>
-#include <vector>
 #include <fstream>
+#include <vector>
+#include "all.hpp"
 
 #if defined(__unix__) || defined(unix)
     const std::string OS = "-f elf64 ";
@@ -12,7 +11,7 @@
     throw std::runtime_error("Unsupported OS");
 #endif
 
-std::string removextension(const std::string &filename) {
+std::string remove_extension(const std::string &filename) {
     size_t lastDot = filename.find_last_of('.');
     if (lastDot != std::string::npos) {
         return filename.substr(0, lastDot);
@@ -46,10 +45,10 @@ std::string CheckCompilers() {
         {"   GAS", "as --version > /dev/null 2>&1"},
         {"   NASM", "nasm --version > /dev/null 2>&1"},
         {"   YASM", "yasm --version > /dev/null 2>&1"},
-        {"   FASM (Not supported)", "fasm --version > /dev/null 2>&1"}
+        {"   FASM", "fasm --version > /dev/null 2>&1"}
     };
 
-    for (const auto& [name, cmd] : compilers) {
+    for (const auto &[name, cmd] : compilers) {
         if (std::system(cmd.c_str()) == 0) {
             answer += name + "\n";
         }
@@ -58,58 +57,63 @@ std::string CheckCompilers() {
 }
 
 int main(int argc, char *argv[]) {
+    Parser instance;
     std::vector <std::string> Compilers = {"nasm", "as", "yasm"};
     std::string arguments = "";
-    std::string linker= "ld "; 
-    std::string exestr = "./";
-    std::string remover = "rm ";
     std::ifstream Code;
     std::string line;
-    std::string extraLd = "";
-    std::vector <std::string> safeargc(argv, argv + argc);
+    std::string ExtraLD = "";
+    std::vector <std::string> safeargc(argv, argc + argv);
     std::string Vec_extrac = Findvector(safeargc);  // gets file that specified by -o for vectors
     bool is_gas = false;
     const std::string availableCompilers = CheckCompilers();
     if (argc < 2) {
-        std::cerr << "Specify Assembly compiler you are want to use (nasm, as, yasm). type 'asmz -h' for more help \n";
-        std::exit(1);
+        std::cerr << "Type 'asmz -h' for more help \n";
         return 1;
     }
-    else if (argc == 2 && std::string(argv[1]) != "-h") {
-        std::cerr << "Specify Assembly file to compile.\n";
-        std::exit(1);
-        return 1;
+    else if (argc == 2) {
+        if (std::string(argv[1]) == "-h") {
+            if (!availableCompilers.empty()) { 
+                std::cout << 
+                "ASMZ 1.6 \n"
+                "Usage: asmz (ASM-Compiler) {ASM_FILE} \n\n"
+                "(ASM-Compiler) - is Assembly compiler you want to use, see below all avaible compilers \n"
+                "{ASM_FILE} - is code written in Assembly language that you want to compile \n\n"
+                "Flags: \n"
+                "   -o: Will make executable name to what you typed after this flag \n"
+                "Avaible Assembly compilers: \n" << availableCompilers;
+                return 0;
+            }
+            else {
+                std::cerr << "Install Assembly language compiler first, like: nasm, as, yasm. \n";
+                return 1;
+            }
+        }
+        else {
+            std::cerr << "Specify Assembly compiler you are want to use, and assembly file to compile. type 'asmz -h' for more help \n";
+            return 1;
+        }
+    }
+    else {
+        const std::filesystem::path asm_file = argv[2];
+        if (!std::filesystem::exists(asm_file) || (asm_file.extension() != ".s" && asm_file.extension() != ".S" && asm_file.extension() != ".asm")) {
+            std::cerr << "Specify assembly file to compile. type 'asmz -h' for more help \n";
+            return 1;
+        }
     }
     if (Vec_extrac.find_first_of(";&|<>!*%^()$`/{}") != std::string::npos) {
         std::cerr << "Error: invalid symbols.\n";
         return 1;
     }
-    for (int j = 1; j < argc; j++) {
-        if (std::string(argv[j]) == "-h") { 
-            std::cout << " ASMZ 1.3 \n"
-            "Usage: asmz (ASM-Compiler) {EXAMPLE.asm} \n"
-            "(ASM-Compiler) - is Assembly compiler you want to use, see below all avaible compilers \n"
-            "{EXAMPLE.asm} - is code written in Assembly language that you want to compile \n"
-            "\n"
-            "Flags: \n"
-            "   -o: Will make executable name to what you typed after this flag \n"
-            "Avaible Assembly compilers: \n" << availableCompilers;
-            return 0;
-        }
-        else if (availableCompilers.empty()) {
-            std::cerr << "Install Assembly language compiler first, like: nasm, as, yasm. \n";
-            return 1;
-        }
-    }
     Code.open(argv[2]);
-    for (auto x : Compilers) {
+    for (std::string x : Compilers) {
         if (argv[1] == Compilers[0]) {
             arguments = "nasm ";
             while (std::getline(Code, line))
             {
                 if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
-                    extraLd = "-m elf_i386 ";
+                    ExtraLD = "-m elf_i386 ";
                     break;
                 }
                 else {
@@ -130,7 +134,7 @@ int main(int argc, char *argv[]) {
             {
                 if ((line.find("bits 32")) != std::string::npos) {
                     arguments += "-f elf32 ";
-                    extraLd = "-m elf_i386 ";
+                    ExtraLD = "-m elf_i386 ";
                     break;
                 }
                 else {
@@ -140,47 +144,32 @@ int main(int argc, char *argv[]) {
             }
             break;
         }
+        else {
+            std::cerr << "Unsupported compiler\n";
+            return 1;
+        }
     }
     Code.close();
-    if (is_gas && !(Vec_extrac.empty())) {
+    if (is_gas && Vec_extrac.empty()) {
         safeargc.insert(safeargc.begin() + 3, "-o");
-        safeargc.insert(safeargc.begin() + 4, (removextension(std::string(argv[2]))) + ".o");
+        safeargc.insert(safeargc.begin() + 4, (remove_extension(std::string(argv[2]))) + ".o");
     }
-    for (int i = 2; i < safeargc.size(); ++i) {
+    for (size_t i = 2; i < safeargc.size(); ++i) {
         if (safeargc[i] == "-o") {
-            if (!(Vec_extrac.empty()) && argc == 5) {
-                safeargc[4] += ".o";
+            if (!Vec_extrac.empty()) {
+                safeargc[i+1] += ".o";
             }
         }
         arguments += safeargc[i];
         arguments += " ";
     }
-    int ASMoutcome = system(arguments.c_str());
-    if (ASMoutcome != 0) {
-        std::cerr << "Compiling error \n";
-        std::exit(1);
-    }
     if (Vec_extrac.empty()) {
-        Vec_extrac = argv[2];   
+        Vec_extrac = remove_extension(argv[2]);   
     }
-    Vec_extrac = removextension(Vec_extrac);
-    linker += extraLd;
-    linker += Vec_extrac;
-    linker += ".o ";
-    linker += "-o "; 
-    linker += Vec_extrac;
-    int Oresult = system(linker.c_str());
-    if (Oresult != 0) {
-        std::cerr << "Linking Error \n";
-        std::exit(1);
+    if (instance.Compile(arguments, ExtraLD, remove_extension(Vec_extrac)) == false) {
+        std::cerr << instance.error << std::endl;
+        return -1;
     }
-    remover += Vec_extrac + ".o";
-    system(remover.c_str());
-    exestr += Vec_extrac;
-    int exeresult = system(exestr.c_str());
-    if (exeresult != 0) {
-        std::cerr << "Execution error \n";
-        std::exit(1);
-    }
+    
     return 0;
 }
