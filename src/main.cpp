@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     else if (argc == 2) {
-        if (std::string(argv[1]) == "-h") {
+        if (strcmp(argv[1], "-h") == 0) {
             if (!availableCompilers.empty()) { 
                 std::cout << 
                 "ASMZ 1.6 \n"
