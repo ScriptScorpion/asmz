@@ -5,7 +5,7 @@ bool Parser::Compile(const std::string arguments, const std::string ExtraLD, con
         error = "\nCompilation error!\n";
         return false;
     }
-    exe_str = "ld " + ExtraLD + " " + (output + ".o") + " -o " + output;
+    exe_str = "ld " + ExtraLD + " " + (output + ".o") + " -o " + output + " -g";
     if (system(exe_str.c_str()) != 0) {
         error = "\nLinking error!\n";
         return false;
