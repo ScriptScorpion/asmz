@@ -163,6 +163,7 @@ int main(int argc, char *argv[]) {
         arguments += safeargc[i];
         arguments += " ";
     }
+    arguments += "-g";
     if (Vec_extrac.empty()) {
         Vec_extrac = remove_extension(argv[2]);   
     }
