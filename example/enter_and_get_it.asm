@@ -10,11 +10,10 @@ _start:
     mov rsi, buff ; buffer
     mov rdx, buffs ; buffer size
     syscall
-
+    mov rdx, rax ; length of readed bytes 
     mov rax, 1 ; write
     mov rdi, 1 ; write
-    mov rdx, rax ; write that was inputed 
-    mov rsi, buff ; lenght of write
+    mov rsi, buff ; write that was inputed
     syscall
 
     mov rax, 60 ; exit code
