@@ -13,7 +13,7 @@ _start:
     mov rdx, rax ; length of readed bytes 
     mov rax, 1 ; write
     mov rdi, 1 ; write
-    mov rsi, buff ; write that was inputed
+    mov rsi, buff ; write what was inputed
     syscall
 
     mov rax, 60 ; exit code
