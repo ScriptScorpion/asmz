@@ -10,7 +10,7 @@ section .text
 
 _start:
 	sub rsp, 8  ; reserving stack for the value
-	mov BYTE [rsp], 10 ; equivalent of this: push 10 (you cannot do 0x10, it will not work)
+	mov BYTE [rsp], 10 ; equivalent of this: push 10
 	mov DWORD [hello1], 0x31727261 ; 0x31727261 = arr1
 	mov DWORD [hello2], 0x32727261 ; 0x32727261 = arr2
 
