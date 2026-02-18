@@ -4,7 +4,7 @@ section .text
     global _start
 _start:
    mov rax, 0x3b
-   mov rdi, string
+   lea rdi, [string]
    mov rsi, 0
    mov rdx, 0
    syscall
