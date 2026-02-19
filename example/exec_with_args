@@ -1,0 +1,18 @@
+section .data
+    string: db "/bin/ls", 0
+    arg: db "-la", 0
+    string2: dq string ; or you can write dq string, arg, 0
+             dq arg 
+             dq 0 
+section .text
+    global _start
+_start:
+   mov rax, 0x3b
+   lea rdi, [string]
+   lea rsi, [string2]
+   mov rdx, 0
+   syscall
+   
+   mov rax, 60
+   xor rdi, rdi 
+   syscall
