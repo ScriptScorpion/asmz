@@ -3,7 +3,7 @@ ASMZ (Eazy ASM), a utility for simpler Assembly code compilation
 **ASMZ** helps compile Assembly code as FASM(immediately making file executable), but using NASM or others Assembly compilers. 
 
 # Requirements
-  * `g++` or `clang++`
+  * `g++`
   * `make`
   * **assembly compiler** (check out wiki for more info about this: [Compilers](https://github.com/ScriptScorpion/asmz/wiki/Assembly-Compilers))
 
