@@ -6,8 +6,7 @@ default:
 	@echo "select 1 option: install or compile"
 install:
 	@$(CC) $(CCF) $(SOURCE) -o $(OUTPUT)
-	@cp $(OUTPUT) /usr/local/bin/ || exit
-	@rm $(OUTPUT)
+	@mv $(OUTPUT) /usr/local/bin/
 
 compile:
 	@$(CC) $(CCF) $(SOURCE) -o $(OUTPUT)
