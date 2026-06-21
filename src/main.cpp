@@ -65,10 +65,10 @@ int main(int argc, char *argv[]) {
                 "\t-N: Use NASM assembler\n"
                 "\t-Y: Use YASM assembler\n"
                 "\t-G: Use GAS assembler\n"
-                "\t-LD: Use LD linker(default)\n"
-                "\t-LLD: Use LLD linker\n"
-                "\t-x64: Generate code for the x64 CPU(default)\n"
-                "\t-x32: Generate code for the x32 CPU\n"
+                "\t--LD: Use LD linker(default)\n"
+                "\t--LLD: Use LLD linker\n"
+                "\t--64: Generate code for the x64 CPU(default)\n"
+                "\t--32: Generate code for the x32 CPU\n"
                 "\t-o: Specify executable name\n"
                 "\t-d: Add debug information to the file\n"
                 "Avaible Assembly compilers: \n" << availableCompilers;
@@ -88,17 +88,17 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[i], "-G") == 0) {
             is_gas = true;
         }
-        else if (strcmp(argv[i], "-LD") == 0) {
+        else if (strcmp(argv[i], "--LD") == 0) {
             linker_str = "ld";
         }
-        else if (strcmp(argv[i], "-LLD") == 0) {
+        else if (strcmp(argv[i], "--LLD") == 0) {
             linker_str = "lld";
         }
-        else if (strcmp(argv[i], "-x64") == 0) {
+        else if (strcmp(argv[i], "--64") == 0) {
             is_x64 = true;
             is_x32 = false;
         }
-        else if (strcmp(argv[i], "-x32") == 0) {
+        else if (strcmp(argv[i], "--32") == 0) {
             is_x32 = true;
             is_x64 = false;
         }
