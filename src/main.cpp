@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
             linker_str = "ld";
         }
         else if (strcmp(argv[i], "--lld") == 0) {
-            linker_str = "lld";
+            linker_str = "ld.lld";
         }
         else if (strcmp(argv[i], "--64") == 0) {
             is_x64 = true;
