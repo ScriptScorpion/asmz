@@ -16,6 +16,12 @@ std::string remove_extension(const std::string &filename) {
     }
     return filename; 
 }
+std::string remove_path(const std::string &path) {
+    if (path.find_last_of("\\/") != std::string::npos) {
+        return path.substr(path.find_last_of("\\/")+1, path.size());
+    }
+    return path;
+}
 
 std::string CheckCompilers() {
     std::string answer = "";
@@ -58,7 +64,7 @@ int main(int argc, char *argv[]) {
         if (strcmp(argv[i], "-h") == 0) {
             if (!availableCompilers.empty()) { 
                 std::cout << 
-                "ASMZ 1.7 \n"
+                "ASMZ 1.8 \n"
                 "Usage: asmz (Options) {ASM_FILE} \n\n"
                 "{ASM_FILE} - is code written in Assembly language that you want to compile \n\n"
                 "Flags: \n"
@@ -125,7 +131,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     if (output_file.empty()) {
-        output_file = input_file;
+        output_file = remove_path(remove_extension(input_file));
     }
     if (input_file.find_first_of(";&|<>!*%^()$`{}") != std::string::npos || output_file.find_first_of(";&|<>!*%^()$`{}") != std::string::npos) {
         std::cerr << "Error: invalid symbols in filename.\n";
@@ -182,7 +188,7 @@ int main(int argc, char *argv[]) {
     arguments += input_file;
     linker_str += ' ';
     
-    if (instance.Compile(arguments, linker_str, remove_extension(output_file)) == false) {
+    if (instance.Compile(arguments, linker_str, output_file) == false) {
         return 1;
     }
     
